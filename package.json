@@ -1,0 +1,58 @@
+{
+  "name": "mcp-french-school-map",
+  "version": "0.1.0",
+  "description": "MCP server for French education data: school directory, geocoded establishments, IPS, Parcoursup and exam dataset discovery.",
+  "type": "module",
+  "bin": {
+    "mcp-french-school-map": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "chmod +x dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "mcp",
+    "open-data",
+    "france",
+    "education",
+    "schools",
+    "ips",
+    "parcoursup",
+    "data-education"
+  ],
+  "author": "Hug0x0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hug0x0/mcp-french-school-map.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hug0x0/mcp-french-school-map/issues"
+  },
+  "homepage": "https://github.com/Hug0x0/mcp-french-school-map#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.5",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
