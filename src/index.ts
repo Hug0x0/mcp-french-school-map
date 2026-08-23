@@ -174,6 +174,30 @@ server.tool('french_school_map_search_schools', 'Search the national education d
   } catch (error) { return errorResult(error instanceof Error ? error.message : 'Failed to search schools'); }
 });
 
+server.tool('french_school_map_get_school_profile', 'Fetch one school profile by UAI identifier from the national education directory.', {
+  uai: z.string().describe('UAI / identifiant_de_l_etablissement, e.g. 0750659X.'),
+}, async ({ uai }) => {
+  try {
+    const escaped = uai.replace(/'/g, "''").toUpperCase();
+    const data = await odsRecords('https://data.education.gouv.fr', 'fr-en-annuaire-education', {
+      where: `identifiant_de_l_etablissement = '${escaped}'`,
+      limit: 1,
+    });
+    return jsonResult({
+      source: 'data.education.gouv.fr/fr-en-annuaire-education',
+      uai: escaped,
+      result: data,
+      suggested_followups: [
+        `IPS établissement ${escaped}`,
+        `résultats examens ${escaped}`,
+        `Parcoursup ${escaped}`,
+      ],
+    });
+  } catch (error) {
+    return errorResult(error instanceof Error ? error.message : 'Failed to fetch school profile');
+  }
+});
+
 server.tool('french_school_map_search_education_datasets', 'Search data.gouv.fr for education datasets such as IPS, Parcoursup, exam results, sectorization and school directory.', {
   query: z.string().default('IPS établissements scolaires'),
   page_size: z.number().int().min(1).max(50).default(10),

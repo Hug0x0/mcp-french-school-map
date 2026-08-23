@@ -6,6 +6,8 @@ MCP server for French education data: school directory, geocoded establishments,
 
 Run the MCP and call `french_school_map_get_sources` first to inspect source coverage. This server also exposes domain-specific tools for the topic described above.
 
+Includes school search, UAI school profiles, education dataset discovery, and comparison context helpers.
+
 ## Install
 
 ```bash
